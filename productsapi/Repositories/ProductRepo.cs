@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace productsapi.Repositories
 {
-    public class ProductRepo : IProduct
+    public class ProductRepo : IProductRepo
     {
         public List<Product> getAll()
         {
@@ -18,11 +18,19 @@ namespace productsapi.Repositories
             throw new NotImplementedException();
         }
 
-        public Guid addNew(Product product) 
+        public int addNew(Product product) 
         {
             throw new NotImplementedException();
         }
 
+        IEnumerable<Product> IProductRepo.getAll()
+        {
+            throw new NotImplementedException();
+        }
 
+        Guid IProductRepo.addNew(Product product)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

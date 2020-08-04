@@ -6,10 +6,12 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using productsapi.Data;
 
 namespace productsapi
 {
@@ -26,6 +28,10 @@ namespace productsapi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddDbContext<ProductContext>(options => 
+            options.UseMySql("Server=localhost;Database=productdb;user=root;Password=123", 
+            mysqloptions=>mysqloptions.ServerVersion(new Version(8, 0, 18), Pomelo.EntityFrameworkCore.MySql.Infrastructure.ServerType.MySql))
+            );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
