@@ -8,22 +8,23 @@ namespace productsapi.Repositories
 {
     public interface ICategoryRepo
     {
-        IEnumerable<Category> getAll();
+        IEnumerable<Category> GetAll();
 
-        Category getOneById(Guid id);
+        Category GetOneById(Guid id);
 
-        Guid add(Category category);
+        void Add(Category category);
 
-        bool edit(Guid id);
+        void Edit(Category category);
 
-        bool delete(Guid id);
+        void Delete(Guid id);
 
-        Category getParent(Guid id);
+        Category GetParent(Guid id);
 
-        IEnumerable<Category> getChilds(Guid id);
+        IEnumerable<Category> GetChilds(Guid id);
 
-        IEnumerable<Product> getProducts(Guid id);
+        IEnumerable<Product> GetProducts(Guid id);
 
+        void SaveChanges();
 
     }
 }

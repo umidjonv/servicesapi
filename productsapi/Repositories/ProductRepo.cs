@@ -28,7 +28,22 @@ namespace productsapi.Repositories
             throw new NotImplementedException();
         }
 
-        Guid IProductRepo.addNew(Product product)
+        public Guid add(Product product)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool edit(Guid id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool delete(Guid id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Category getCategory(Guid id)
         {
             throw new NotImplementedException();
         }

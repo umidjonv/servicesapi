@@ -11,6 +11,7 @@ namespace productsapi.Data
     public class ProductContext: DbContext
     {
         public DbSet<Product> Product { get; set; }
+        public DbSet<Category> Category { get; set; }
 
         public ProductContext(DbContextOptions options) : base(options)
         {
