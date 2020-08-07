@@ -1,15 +1,22 @@
-﻿using System;
+﻿using productsapi.Entities;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace productsapi.Models
 {
+    [Table("product")]
     public class Product
     {
+        
+
         [Key]
         public Guid id { get; set; }
+
         [Required]
         [MaxLength(100)]
         public string name { get; set; }
@@ -20,9 +27,8 @@ namespace productsapi.Models
         public float sale_price { get; set; }
         [Required]
         public Category category { get; set; }
-        public DateTime created_at { get; set; }
-        public DateTime updated_at { get; set; }
         public bool status { get; set; }
 
+        
     }
 }

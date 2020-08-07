@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.ChangeTracking;
 using productsapi.Data;
+using productsapi.Entities;
 using productsapi.Models;
 using System;
 using System.Collections.Generic;
@@ -39,22 +40,22 @@ namespace productsapi.Repositories
 
         public IEnumerable<Category> GetAll()
         {
-            throw new NotImplementedException();
+            return _context.Category.ToList();
         }
 
         public IEnumerable<Category> GetChilds(Guid id)
         {
-            throw new NotImplementedException();
+            return _context.Category.Where(x => x.id == id).ToList();
         }
 
         public Category GetOneById(Guid id)
         {
-            throw new NotImplementedException();
+            return _context.Category.FirstOrDefault(x => x.id == id);
         }
 
         public Category GetParent(Guid id)
         {
-            throw new NotImplementedException();
+            return _context.Category.FirstOrDefault(x => x.id == id);
         }
 
         public IEnumerable<Product> GetProducts(Guid id)
@@ -64,7 +65,7 @@ namespace productsapi.Repositories
 
         public void SaveChanges()
         {
-            throw new NotImplementedException();
+            _context.SaveChanges();
         }
     }
 
