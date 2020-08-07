@@ -6,17 +6,8 @@ using System.Threading.Tasks;
 
 namespace productsapi.Repositories
 {
-    public interface ICategoryRepo
+    interface ICategoryRepo : IDefaultRepo<Category>
     {
-        IEnumerable<Category> GetAll();
-
-        Category GetOneById(Guid id);
-
-        void Add(Category category);
-
-        void Edit(Category category);
-
-        void Delete(Guid id);
 
         Category GetParent(Guid id);
 
@@ -24,7 +15,7 @@ namespace productsapi.Repositories
 
         IEnumerable<Product> GetProducts(Guid id);
 
-        void SaveChanges();
+        
 
     }
 }

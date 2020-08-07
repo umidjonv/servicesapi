@@ -1,4 +1,5 @@
-﻿using productsapi.Models;
+﻿using productsapi.Data;
+using productsapi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,44 +9,47 @@ namespace productsapi.Repositories
 {
     public class ProductRepo : IProductRepo
     {
-        public List<Product> getAll()
+        ProductContext _context;
+
+        public ProductRepo(ProductContext context)
         {
-            throw new NotImplementedException();
+            _context = context;            
         }
 
-        public Product getOneByID()
+        public Product getOneByID(Guid id)
         {
-            throw new NotImplementedException();
+            return _context.Product.FirstOrDefault(x => x.id == id);
         }
 
-        public int addNew(Product product) 
+        
+        public IEnumerable<Product> GetAll()
         {
-            throw new NotImplementedException();
+            return _context.Product.ToList();
         }
 
-        IEnumerable<Product> IProductRepo.getAll()
+        public Product GetOneById(Guid id)
         {
-            throw new NotImplementedException();
+            return _context.Product.FirstOrDefault(x => x.id == id);
         }
 
-        public Guid add(Product product)
+        public void Add(Product entity)
         {
-            throw new NotImplementedException();
+            _context.Product.Add(entity);
         }
 
-        public bool edit(Guid id)
+        public void Edit(Product entity)
         {
-            throw new NotImplementedException();
+            _context.Update(entity);
         }
 
-        public bool delete(Guid id)
+        public void Delete(Guid id)
         {
-            throw new NotImplementedException();
+            _context.Product.FirstOrDefault(x => x.id == id).status = false;
         }
 
-        public Category getCategory(Guid id)
+        public void SaveChanges()
         {
-            throw new NotImplementedException();
+            _context.SaveChanges();
         }
     }
 }
