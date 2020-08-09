@@ -11,7 +11,7 @@ namespace productsapi.DTO
         
         public string name { get; set; }
 
-        public Models.Category parent;
+        public string parent_name { get; set; }
 
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace productsapi.Repositories
 {
-    interface ICategoryRepo : IDefaultRepo<Category>
+    public interface ICategoryRepo : IDefaultRepo<Category>
     {
 
         Category GetParent(Guid id);

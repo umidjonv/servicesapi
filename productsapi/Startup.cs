@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -12,6 +13,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using productsapi.Data;
+using productsapi.Repositories;
 
 namespace productsapi
 {
@@ -28,11 +30,15 @@ namespace productsapi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddDbContext<ProductContext>(options =>
             options.UseNpgsql("Host=localhost;Database=productdb;Username=user;Password=123")
             //options.UseMySql("Server=localhost;Database=productdb;user=user;Password=123",
             //mysqloptions => mysqloptions.ServerVersion(new Version(8, 0, 18), Pomelo.EntityFrameworkCore.MySql.Infrastructure.ServerType.MySql))
             );
+
+
+            services.AddScoped<ICategoryRepo, CategoryRepo>();
             
         }
 

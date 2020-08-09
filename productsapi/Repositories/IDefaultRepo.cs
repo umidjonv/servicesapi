@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace productsapi.Repositories
 {
-    interface IDefaultRepo<T>
+    public interface IDefaultRepo<T>
     {
         IEnumerable<T> GetAll();
 
