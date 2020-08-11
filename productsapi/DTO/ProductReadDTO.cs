@@ -13,8 +13,7 @@ namespace productsapi.DTO
             public string description { get; set; }
             public float price { get; set; }
             public float sale_price { get; set; }
-            public Category category { get; set; }
+            public string category_name { get; set; }
             
-        
     }
 }

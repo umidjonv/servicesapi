@@ -47,9 +47,11 @@ namespace productsapi.Repositories
             _context.Product.FirstOrDefault(x => x.id == id).status = false;
         }
 
-        public void SaveChanges()
+        public int SaveChanges()
         {
-            _context.SaveChanges();
+            return _context.SaveChanges();
         }
+
+        
     }
 }

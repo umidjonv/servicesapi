@@ -63,9 +63,9 @@ namespace productsapi.Repositories
             throw new NotImplementedException();
         }
 
-        public void SaveChanges()
+        public int SaveChanges()
         {
-            _context.SaveChanges();
+            return _context.SaveChanges();
         }
     }
 

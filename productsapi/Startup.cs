@@ -39,6 +39,7 @@ namespace productsapi
 
 
             services.AddScoped<ICategoryRepo, CategoryRepo>();
+            services.AddScoped<IProductRepo, ProductRepo>();
             
         }
 

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace productsapi
 {
-    interface IProductRepo:IDefaultRepo<Product>
+    public interface IProductRepo:IDefaultRepo<Product>
     {
         
 

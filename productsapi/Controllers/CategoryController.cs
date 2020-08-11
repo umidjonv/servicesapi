@@ -43,10 +43,10 @@ namespace productsapi.Controllers
 
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
-        
+
         public IActionResult AddNew(CategoryWriteDTO category)
         {
-            
+
             if (category != null)
             {
                 Category parent;
@@ -54,10 +54,10 @@ namespace productsapi.Controllers
                     category.parent = _repo.GetOneById(category.parent_id);
                 Category cat = _mapper.Map<Category>(category);
                 _repo.Add(cat);
-                _repo.SaveChanges();
-                return CreatedAtRoute("{id}", cat.id);
+                if (_repo.SaveChanges() > 0)
+                    return Ok("created");
             }
-            else { return BadRequest(); }
+            return BadRequest();
 
         }
 
@@ -77,5 +77,52 @@ namespace productsapi.Controllers
 
         }
 
-    }
+        [HttpPut]
+        [Route("{id}")]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        public IActionResult Edit(Guid id, CategoryWriteDTO category)
+        {
+            if (category != null)
+            {
+                Category parent;
+                if (category.parent_id != null)
+                    category.parent = _repo.GetOneById(category.parent_id);
+                Category cat = _mapper.Map<Category>(category);
+                _repo.Edit(cat);
+                if (_repo.SaveChanges() > 0)
+                    return Ok("updated");
+            }
+            return BadRequest();
+        }
+
+        [HttpDelete]
+        [Route("{id}")]
+        public IActionResult Delete(Guid id)
+        {
+            if (id != null)
+            {
+                _repo.Delete(id);
+                if (_repo.SaveChanges() > 0)
+                    return Ok("deleted");
+
+            }
+            return NotFound();
+
+
+
+        }
+
+        [HttpGet]
+        [Route("{id}/parent")]
+        public IActionResult GetParent(Guid id)
+        {
+            if (id != null)
+            {
+                Category cat = _repo.GetParent(id);
+                if(cat!=null)
+                    return Ok(cat);
+            }
+            return NotFound();
+
+        }
 }

@@ -17,7 +17,7 @@ namespace productsapi.Repositories
 
         void Delete(Guid id);
 
-        void SaveChanges();
+        int SaveChanges();
 
 
     }
