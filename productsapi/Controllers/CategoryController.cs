@@ -80,7 +80,7 @@ namespace productsapi.Controllers
         [HttpPut]
         [Route("{id}")]
         [ProducesResponseType(StatusCodes.Status201Created)]
-        public IActionResult Edit(Guid id, CategoryWriteDTO category)
+        public IActionResult Edit(CategoryWriteDTO category)
         {
             if (category != null)
             {
@@ -119,10 +119,11 @@ namespace productsapi.Controllers
             if (id != null)
             {
                 Category cat = _repo.GetParent(id);
-                if(cat!=null)
+                if (cat != null)
                     return Ok(cat);
             }
             return NotFound();
 
         }
+    }
 }

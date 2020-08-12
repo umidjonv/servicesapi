@@ -54,5 +54,41 @@ namespace productsapi.Controllers
             return BadRequest();
 
         }
+
+        [HttpPut]
+        [Route("{id}")]
+        public IActionResult Edit(ProductWriteDTO product)
+        {
+            if (product != null)
+            {
+                if (product.category_id != null)
+                {
+                    product.category = _catrepo.GetOneById(product.category_id);
+                    Product productEdit = _mapper.Map<Product>(product);
+                    _repo.Edit(productEdit);
+                    _repo.SaveChanges();
+                    if (_repo.SaveChanges() > 0)
+                        return Ok("updated");
+                }
+            }
+            return BadRequest();
+        }
+
+        [HttpDelete]
+        [Route("{id}")]
+        public IActionResult Delete(Guid id)
+        {
+            if (id != null)
+            {
+                _repo.Delete(id);
+                if (_repo.SaveChanges() > 0)
+                    return Ok("deleted");
+
+            }
+            return NotFound();
+
+
+
+        }
     }
 }
