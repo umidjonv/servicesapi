@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.ChangeTracking;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using productsapi.Data;
 using productsapi.Entities;
 using productsapi.Models;
@@ -43,10 +44,6 @@ namespace productsapi.Repositories
             return _context.Category.ToList();
         }
 
-        public IEnumerable<Category> GetChilds(Guid id)
-        {
-            return _context.Category.Where(x => x.id == id).ToList();
-        }
 
         public Category GetOneById(Guid id)
         {
@@ -58,10 +55,20 @@ namespace productsapi.Repositories
             return _context.Category.FirstOrDefault(x => x.id == id);
         }
 
-        public IEnumerable<Product> GetProducts(Guid id)
+        public Category GetProducts(Guid id)
         {
-            throw new NotImplementedException();
+            Category cat = _context.Category.Include(p => p.products).FirstOrDefault(x => x.id == id);
+            return cat;
+
         }
+
+        public IEnumerable<Category> GetChilds(Guid id)
+        {
+            Category cat = _context.Category.Include(p => p.childs).FirstOrDefault(x => x.id == id);
+            return cat.childs;
+
+        }
+
 
         public int SaveChanges()
         {

@@ -1,8 +1,10 @@
-﻿using productsapi.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using productsapi.Data;
 using productsapi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 
 namespace productsapi.Repositories
@@ -47,11 +49,11 @@ namespace productsapi.Repositories
             _context.Product.FirstOrDefault(x => x.id == id).status = false;
         }
 
+
         public int SaveChanges()
         {
             return _context.SaveChanges();
         }
 
-        
     }
 }

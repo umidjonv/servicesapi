@@ -13,7 +13,7 @@ namespace productsapi.Repositories
 
         IEnumerable<Category> GetChilds(Guid id);
 
-        IEnumerable<Product> GetProducts(Guid id);
+        Category GetProducts(Guid id);
 
         
 

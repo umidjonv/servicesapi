@@ -16,6 +16,8 @@ namespace productsapi.Data
         public DbSet<Product> Product { get; set; }
         public DbSet<Category> Category { get; set; }
 
+        public DbSet<Image> Image { get; set; }
+
         public DbSet<EntityLog> Entity { get; set; }
 
         public ProductContext(DbContextOptions options) : base(options)
@@ -27,12 +29,19 @@ namespace productsapi.Data
         {
 
             var cat = modelBuilder.HasPostgresExtension("uuid-ossp").Entity<Category>();
+            cat.HasMany(c => c.products).WithOne(p => p.category);
+                
                 cat.Property(e => e.id).HasDefaultValueSql("uuid_generate_v4()");
                 cat.Property(e => e.status).HasDefaultValue(true).ValueGeneratedOnAdd();
 
             var prod = modelBuilder.HasPostgresExtension("uuid-ossp").Entity<Product>();
                 prod.Property(e => e.id).HasDefaultValueSql("uuid_generate_v4()");
                 prod.Property(e => e.status).HasDefaultValue(true).ValueGeneratedOnAdd();
+            prod.HasOne(p => p.category).WithMany(c=>c.products);
+
+            var img = modelBuilder.HasPostgresExtension("uuid-ossp").Entity<Image>();
+            img.Property(e => e.id).HasDefaultValueSql("uuid_generate_v4()");
+            img.Property(e => e.status).HasDefaultValue(true).ValueGeneratedOnAdd();
 
 
             modelBuilder.Entity<EntityLog>()

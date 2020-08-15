@@ -35,8 +35,6 @@ namespace productsapi.Controllers
         }
 
         [HttpPost]
-        [ProducesResponseType(StatusCodes.Status201Created)]
-
         public IActionResult AddNew(ProductWriteDTO product)
         {
             if (product != null)

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace productsapi.Models
 {
     [Table("category")]
-    public class Category
+    public class Category:IBaseEntity
     {
 
         public Guid id { get; set; }
@@ -24,6 +24,9 @@ namespace productsapi.Models
         public IEnumerable<Category> childs { get; set; }
 
         public bool status { get; set; }
+
+        public IEnumerable<Product> products { get; set; }
+        
 
     }
 }

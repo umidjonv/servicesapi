@@ -49,7 +49,7 @@ namespace productsapi.Controllers
 
             if (category != null)
             {
-                Category parent;
+                
                 if (category.parent_id != null)
                     category.parent = _repo.GetOneById(category.parent_id);
                 Category cat = _mapper.Map<Category>(category);
@@ -84,7 +84,7 @@ namespace productsapi.Controllers
         {
             if (category != null)
             {
-                Category parent;
+                
                 if (category.parent_id != null)
                     category.parent = _repo.GetOneById(category.parent_id);
                 Category cat = _mapper.Map<Category>(category);
@@ -125,5 +125,38 @@ namespace productsapi.Controllers
             return NotFound();
 
         }
+
+        [HttpGet]
+        [Route("{id}/products")]
+        public IActionResult GetProducts(Guid id)
+        {
+            
+            if (id != null)
+            {
+                Category cat = _repo.GetProducts(id);
+                CategoryProductsDTO catproducts = _mapper.Map<CategoryProductsDTO>(cat);
+                return Ok(catproducts.products);
+
+
+            }
+            return NotFound();
+        }
+
+        [HttpGet]
+        [Route("{id}/childs")]
+        public IActionResult GetChilds(Guid id)
+        {
+            
+            if (id != null)
+            {
+                IEnumerable<Category> cats = _repo.GetChilds(id);
+                IEnumerable<CategoryReadDTO> catproducts = _mapper.Map<IEnumerable<CategoryReadDTO>>(cats);
+                return Ok(catproducts);
+
+
+            }
+            return NotFound();
+        }
     }
+
 }

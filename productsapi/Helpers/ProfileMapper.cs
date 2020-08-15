@@ -17,7 +17,8 @@ namespace productsapi.Helpers
                 .ForMember(d => d.parent_name, opt => opt.MapFrom(src => src.parent.name));
 
             CreateMap<CategoryWriteDTO, Category>();
-            //.ForMember(x => x.parent, w => w.MapFrom(src => src.parent_id));
+            CreateMap<Category, CategoryProductsDTO>();
+
 
             CreateMap<Product, ProductReadDTO>()
                 .ForMember(d => d.category_name, opt => opt.MapFrom(src => src.category.name));

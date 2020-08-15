@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace productsapi.Models
 {
     [Table("product")]
-    public class Product
+    public class Product:IBaseEntity
     {
         
 
@@ -29,6 +29,7 @@ namespace productsapi.Models
         public Category category { get; set; }
         public bool status { get; set; }
 
-        
+
+
     }
 }
